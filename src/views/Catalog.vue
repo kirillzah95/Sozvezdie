@@ -4,21 +4,9 @@
       <div class="row mt-4">
         <div class="col-xl-12">
           <div class="row">
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
+            <div class="col-lg-4 col-md-6 mb-4" v-for="offer in offers" :key="offer.id">
+              <OfferCard :title="offer.title"/>
+            </div>
           </div>
         </div>
       </div>
@@ -38,12 +26,24 @@
 </style>
 
 <script>
+  import axios from 'axios';
   import OfferCard from "@/components/OfferCard.vue";
 
   export default {
   name: "Catalog",
+  data() {
+  return {
+  offers: []
+  }
+  },
   components: {
   OfferCard
+  },
+
+  mounted() {
+  axios.get(window.$apiURI + "/offers/GetAll").then(response => {
+  this.offers = response.data;
+  })
   }
   };
 </script>

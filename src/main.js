@@ -4,7 +4,11 @@ import router from "./router";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
+
 Vue.config.productionTip = false;
+
+window.$apiURI = "http://localhost:4890/api";
 
 new Vue({
   router,
