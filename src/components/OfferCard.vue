@@ -1,17 +1,20 @@
+https://startbootstrap.com/template/shop-item
+
 <template>
   <a :href="/offer/ + id" class="card h-100">
     <div class="card-body" v-bind:style="{ backgroundImage: 'url(' + photo + ')' }">
       <div></div>
       <div class="card-title-container">
         <div class="card-title">{{ title }}</div>
-        <div class="card-period">start - end (days)</div>
+        <div class="card-period">{{ period }}</div>
       </div>
     </div>
     <div class="card-footer">
       <p class="card-text">{{ description }}</p>
     </div>
     <div class="card-footer">
-      <small class="float-right">Цена от: {{ price }} Р</small>
+      <small class="float-right" v-if="price">Цена от: {{ price }} Р</small>
+	  <small class="float-right" v-else><br></small>
     </div>
   </a>
 </template>
@@ -22,8 +25,7 @@
   props: {
   title: String,
   photo: String,
-  periodStart: String,
-  periodEnd: String,
+  period: String,
   description: String,
   price: String,
   id: String
