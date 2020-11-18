@@ -8,26 +8,30 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <router-link class="nav-link" to="/">Каталог</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/about">Об тестовом задание</router-link>
-            </li>
+            <router-link class="nav-link" exact-active-class="active" to="/">
+              <li class="nav-item">Каталог</li>
+            </router-link>
+            <router-link class="nav-link" exact-active-class="active" to="/about">
+              <li class="nav-item">Об тестовом задание</li>
+            </router-link>
           </ul>
         </div>
       </div>
     </nav>
-    <router-view />
+    <router-view class="body"/>
   </div>
 </template>
 
-<style>
-#app {
+<style scope>
+  #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
+  }
+
+  .body {
+  padding-top: 56px;
+  }
 </style>

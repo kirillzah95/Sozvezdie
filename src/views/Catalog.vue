@@ -19,12 +19,6 @@
   </div>
 </template>
 
-<style scoped="">
-  .body {
-  padding-top: 56px;
-  }
-</style>
-
 <script>
   import axios from 'axios';
   import OfferCard from "@/components/OfferCard.vue";
@@ -55,8 +49,8 @@
     return startDateConverted + " - " + endDateConverted + " (" + diff + " дн.)";
   }
   },
-  mounted() {
-    axios.get(window.$apiURI + "/offers/GetAll").then(response => {
+  async mounted() {
+    await axios.get(window.$apiURI + "/offers/GetAll").then(response => {
       this.offers = response.data;
       this.offers = this.offers.map((offer)=> {
         if(offer.photoCard && offer.photoCard.thumbnail) {
@@ -75,3 +69,50 @@
   }
   };
 </script>
+
+<style scoped="">
+  .card, .card:visited, .card:hover, .card:active  {
+  color: black;
+  text-decoration: none;
+  }
+
+  .card-body {
+  width: 100%;
+  height: 350px;
+  background-image: none;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 0px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  }
+
+  .card-title-container {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  background-color: #00000050;
+  color: white;
+  font-size: 24px;
+  }
+  .card-title {
+  color: white;
+  font-size: 24px;
+  margin: 0px;
+  padding: 0px;
+  }
+  .card-period {
+  color: white;
+  font-size: 24px;
+  }
+  .card-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  }
+</style>
