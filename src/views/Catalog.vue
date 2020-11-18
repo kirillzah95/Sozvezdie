@@ -5,7 +5,7 @@
         <div class="col-xl-12">
           <div class="row">
             <div class="col-lg-4 col-md-6 mb-4" v-for="offer in offers" :key="offer.id">
-              <OfferCard :title="offer.title"/>
+                <OfferCard :id="offer.id" :title="offer.title" :photo="offer.photo" :description="offer.description" :price="offer.minPrice"/>
             </div>
           </div>
         </div>
@@ -43,6 +43,14 @@
   mounted() {
   axios.get(window.$apiURI + "/offers/GetAll").then(response => {
   this.offers = response.data;
+  this.offers = this.offers.map((offer)=> {
+  if(offer.photoCard && offer.photoCard.thumbnail) {
+  offer.photo = offer.photoCard.thumbnail;
+  } else {
+  offer.photo = "";
+  }
+  return offer;
+  });
   })
   }
   };
