@@ -34,26 +34,26 @@
   OfferCard
   },
   methods: {
-  FormatPeriods: function (periodStart, periodEnd) {
-    var startDate = new Date(periodStart);
-    var endDate = new Date(periodEnd);
-    var diff = (endDate.getTime() - startDate.getTime()) / 86400000;
-    var startDateY = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startDate);
-    var startDateM = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(startDate);
-    var startDateD = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startDate);
-    var startDateConverted = startDateY + "." + startDateM + "." + startDateD;
-    var endDateY = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(endDate);
-    var endDateM = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(endDate);
-    var endDateD = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(endDate);
-    var endDateConverted = endDateY + "." + endDateM + "." + endDateD;
-    return startDateConverted + " - " + endDateConverted + " (" + diff + " дн.)";
-  }
+    FormatPeriods: function (periodStart, periodEnd) {
+      var startDate = new Date(periodStart);
+      var endDate = new Date(periodEnd);
+      var diff = (endDate.getTime() - startDate.getTime()) / 86400000;
+      var startDateY = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startDate);
+      var startDateM = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(startDate);
+      var startDateD = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startDate);
+      var startDateConverted = startDateY + "." + startDateM + "." + startDateD;
+      var endDateY = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(endDate);
+      var endDateM = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(endDate);
+      var endDateD = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(endDate);
+      var endDateConverted = endDateY + "." + endDateM + "." + endDateD;
+      return startDateConverted + " - " + endDateConverted + " (" + diff + " дн.)";
+    }
   },
   async mounted() {
-    await axios.get(window.$apiURI + "/offers/GetAll").then(response => {
-      this.offers = response.data;
-      this.offers = this.offers.map((offer)=> {
-        if(offer.photoCard && offer.photoCard.thumbnail) {
+  await axios.get(window.$apiURI + "/offers/GetAll").then(response => {
+  this.offers = response.data;
+  this.offers = this.offers.map((offer)=> {
+  if(offer.photoCard && offer.photoCard.thumbnail) {
           offer.photo = offer.photoCard.thumbnail;
         } else {
           offer.photo = "";

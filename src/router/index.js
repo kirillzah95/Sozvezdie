@@ -15,10 +15,17 @@ const routes = [
 		name: "About",
 		component: () =>
 		import(/* webpackChunkName: "about" */ "../views/About.vue")
+	},
+	{
+		path: "/offer/:id",
+		name: "Offer",
+		component: () =>
+		import(/* webpackChunkName: "offer" */ "../views/Offer.vue")
 	}
 ];
 
 const router = new VueRouter({
+	mode: 'history',
 	routes
 });
 

@@ -13,7 +13,7 @@ https://startbootstrap.com/template/shop-item
       <p class="card-text">{{ description }}</p>
     </div>
     <div class="card-footer">
-      <small class="float-right" v-if="price">Цена от: {{ price }} Р</small>
+      <small class="float-right" v-if="price">Цена от: {{ price }} ₽</small>
 	  <small class="float-right" v-else>Цена неизвестна</small>
     </div>
   </a>
