@@ -5,17 +5,23 @@
         <div class="card mt-4">
           <div class="card-body">
             <h3 class="card-title">{{ offer.title }}</h3>
-            <p v-if="!!period">Цена от {{ offer.minPrice }} ₽ за человека на {{ offer.period }}</p>
+            <p v-if="!!offer.period">Цена от {{ offer.minPrice }} ₽ за человека на {{ offer.period }}</p>
             <p v-else="">Цена от {{ offer.minPrice }} ₽ за человека</p>
             <p class="card-text">{{ offer.description }}</p>
           </div>
         </div>
         <div class="card card-outline-secondary my-4">
           <div class="card-header">
-            {{ offer.header }}<br/>({{ offer.duration }} дней)
+            {{ offer.header }}<div v-if="!!offer.duration">({{ offer.duration }} дней)</div>
           </div>
           <div class="card-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+            <div class="container">
+              <div class="row">
+                  <div class="col-xl-3 mb-2 mt-2" v-for="photoEntry in offer.photoAlbum" :key="photoEntry.id">
+                    <enlargeable-image class="PhotoAlbumPhoto" :src="photoEntry.thumbnail" :src_large="photoEntry.photo" />
+                  </div>
+                </div>
+            </div>
                 </div>
         </div>
       </div>
@@ -25,13 +31,17 @@
 
 <script>
   import axios from 'axios';
-
+  import EnlargeableImage from '@diracleo/vue-enlargeable-image';
+  
   export default {
   name: "Offer",
   data() {
   return {
   offer: []
   }},
+  components: {
+  EnlargeableImage
+  },
   methods: {
   GetDurationInDays: function (periodStart, periodEnd) {
   var startDate = new Date(periodStart);
@@ -57,11 +67,15 @@
   if(this.offer.periodStart && this.offer.periodEnd) {
   this.offer.period = this.FormatPeriods(this.offer.periodStart, this.offer.periodEnd);
   this.offer.duration = this.GetDurationInDays(this.offer.periodStart, this.offer.periodEnd);
-  } else {
-  this.offer.period = -1;
-  this.offer.duration = 0;
   }
   });
   }
   };
 </script>
+
+<style scope>
+  .PhotoAlbumPhoto {
+    width: 200px;
+    height: 200px;
+  }
+</style>
