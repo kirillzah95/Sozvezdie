@@ -22,7 +22,17 @@
                   </div>
                 </div>
             </div>
-                </div>
+          </div>
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">Маршрут тура</div>
+          <div class="card-body">
+            <div class="container">
+              <div class="row" v-for="route in offer.route" :key="route.id">
+                {{ route }}
+              </div>
+            </div>
+          </div>
+          </div>
         </div>
       </div>
     </div>
